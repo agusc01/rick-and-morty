@@ -10,8 +10,8 @@ import { RickyAndMortyService } from '../../services/ricky-and-morty.service';
     standalone: true,
     imports: [CommonModule, MostrarPersonajesComponent, HeaderComponent],
     template: `
-        <app-header [autor]="'Cacciatori Agustín'"/>
-        <main class="container pb-5">
+        <main class="container">
+            <app-header [autor]="'Cacciatori Agustín'"/>
             <app-mostrar-personajes [personajes]="personajes" />
         </main>
   `,
