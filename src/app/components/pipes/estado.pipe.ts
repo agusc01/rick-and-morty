@@ -13,8 +13,8 @@ export class EstadoPipe implements PipeTransform {
         unknown: "Desconocido",
     };
 
-    transform(value: Status): unknown {
-        return this.transformacion[value];
+    transform(value: Status): string {
+        return this.transformacion[value] || value;
     }
 
 }

@@ -12,7 +12,7 @@ import { CardPersonajeComponent } from '../card-personaje/card-personaje.compone
                 personaje of this.personajes;
                 track personaje.id
             ) {
-                <div class="col col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                <div class="col col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
                     <app-card-personaje [personaje]='personaje'/>
                 </div>
             } @empty {

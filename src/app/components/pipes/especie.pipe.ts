@@ -10,10 +10,12 @@ export class EspeciePipe implements PipeTransform {
     private transformacion = {
         Alien: "Extraterrestre",
         Human: "Humano",
+        Disease: "Enfermedad",
+        Humanoid: "Humanoide",
     };
 
     transform(value: Species): string {
-        return this.transformacion[value];
+        return this.transformacion[value] || value;
     }
 
 }

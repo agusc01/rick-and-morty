@@ -39,6 +39,8 @@ export interface Location {
 export enum Species {
     Alien = "Alien",
     Human = "Human",
+    Disease = "Disease",
+    Humanoid = "Humanoid",
 }
 
 export enum Status {

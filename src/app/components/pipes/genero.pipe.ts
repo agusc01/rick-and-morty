@@ -14,7 +14,7 @@ export class GeneroPipe implements PipeTransform {
     };
 
     transform(value: Gender): string {
-        return this.transformacion[value];
+        return this.transformacion[value] || value;
     }
 
 }
