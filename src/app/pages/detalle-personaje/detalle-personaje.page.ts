@@ -2,10 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, Input, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { EspeciePipe } from '../../components/pipes/especie.pipe';
-import { EstadoPipe } from '../../components/pipes/estado.pipe';
-import { GeneroPipe } from '../../components/pipes/genero.pipe';
 import { Personaje } from '../../interfaces/personajes.interface';
+import { EspeciePipe } from '../../pipes/especie.pipe';
+import { EstadoPipe } from '../../pipes/estado.pipe';
+import { GeneroPipe } from '../../pipes/genero.pipe';
 import { RutaEpisodioPipe } from '../../pipes/ruta-episodio.pipe';
 import { RickAndMortyService } from '../../services/rick-and-morty.service';
 

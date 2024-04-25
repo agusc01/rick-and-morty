@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Personaje } from '../../interfaces/personajes.interface';
-import { EspeciePipe } from '../pipes/especie.pipe';
-import { EstadoPipe } from '../pipes/estado.pipe';
+import { EspeciePipe } from '../../pipes/especie.pipe';
+import { EstadoPipe } from '../../pipes/estado.pipe';
 
 @Component({
     selector: 'app-card-personaje',
