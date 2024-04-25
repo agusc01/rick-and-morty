@@ -7,7 +7,7 @@ import { EstadoPipe } from '../../components/pipes/estado.pipe';
 import { GeneroPipe } from '../../components/pipes/genero.pipe';
 import { Personaje } from '../../interfaces/personajes.interface';
 import { RutaEpisodioPipe } from '../../pipes/ruta-episodio.pipe';
-import { RickyAndMortyService } from '../../services/ricky-and-morty.service';
+import { RickAndMortyService } from '../../services/rick-and-morty.service';
 
 @Component({
     selector: 'app-detalle-personaje',
@@ -88,7 +88,7 @@ export default class DetallePersonajePage implements OnInit {
 
     @Input() public id!: number;
     private readonly title = inject(Title);
-    private readonly api = inject(RickyAndMortyService);
+    private readonly api = inject(RickAndMortyService);
 
     public personaje: Personaje | undefined | null = undefined;
 

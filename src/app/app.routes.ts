@@ -7,7 +7,7 @@ export const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        title: 'Ricky & Morty API',
+        title: 'Rick & Morty API',
         path: 'inicio',
         loadComponent: () => import('./pages/home/home.page'),
     },

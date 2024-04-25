@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MostrarPersonajesComponent } from '../../components/mostrar-personajes/mostrar-personajes.component';
 import { Personaje } from '../../interfaces/personajes.interface';
 import { RutaEpisodioPipe } from '../../pipes/ruta-episodio.pipe';
-import { RickyAndMortyService } from '../../services/ricky-and-morty.service';
+import { RickAndMortyService } from '../../services/rick-and-morty.service';
 import { Episodio } from './../../interfaces/episodio.interface';
 
 @Component({
@@ -60,7 +60,7 @@ export default class DetalleEpisodioPage implements OnInit {
 
     @Input() public id!: number;
     private readonly title = inject(Title);
-    private readonly api = inject(RickyAndMortyService);
+    private readonly api = inject(RickAndMortyService);
     private readonly pipe = inject(RutaEpisodioPipe);
     public episodio?: Episodio | null | undefined;
     public personajes?: Personaje[] = [];

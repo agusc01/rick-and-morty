@@ -5,7 +5,7 @@ import { Episodio } from '../interfaces/episodio.interface';
 import { Personaje, Personajes } from '../interfaces/personajes.interface';
 
 @Injectable({ providedIn: 'root' })
-export class RickyAndMortyService {
+export class RickAndMortyService {
 
     private readonly delay = 1000;
     private readonly http = inject(HttpClient);

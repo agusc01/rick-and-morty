@@ -1,16 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RickyAndMortyService } from './ricky-and-morty.service';
+import { RickAndMortyService } from './rick-and-morty.service';
 
 describe('RickyAndMortyService', () => {
-  let service: RickyAndMortyService;
+    let service: RickAndMortyService;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(RickyAndMortyService);
-  });
+    beforeEach(() => {
+        TestBed.configureTestingModule({});
+        service = TestBed.inject(RickAndMortyService);
+    });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
+    it('should be created', () => {
+        expect(service).toBeTruthy();
+    });
 });
