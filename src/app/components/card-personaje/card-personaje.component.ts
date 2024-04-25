@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { Personaje } from '../../interfaces/personajes.interface';
 import { EspeciePipe } from '../pipes/especie.pipe';
 import { EstadoPipe } from '../pipes/estado.pipe';
@@ -8,11 +8,11 @@ import { EstadoPipe } from '../pipes/estado.pipe';
 @Component({
     selector: 'app-card-personaje',
     standalone: true,
-    imports: [CommonModule, EspeciePipe, EstadoPipe],
+    imports: [CommonModule, EspeciePipe, EstadoPipe, RouterModule],
     template: `
         <article class="card mb-3">
-            <div class="d-flex align-items-center p-3" (click)="verDetalle(personaje.id)">
-                <img src="{{personaje.image}}" class="img-fluid mr-3" alt="Avatar Personaje" style="max-width: 100px;">
+            <div class="d-flex align-items-center p-3" [routerLink]="['/personaje',personaje.id]">
+                <img [src]="personaje.image" class="img-fluid mr-3" alt="Avatar Personaje">
                 <div class="text-start ms-2">
                     <h5 class="text-info">{{personaje.name}}</h5>
                     <p class="mb-0">Tipo: {{personaje.species | especie}}</p>
@@ -22,6 +22,9 @@ import { EstadoPipe } from '../pipes/estado.pipe';
         </article>
     `,
     styles: `
+        img{
+            max-width: 100px;
+        }
         .card{
            cursor:pointer;
            &:hover{
@@ -34,9 +37,4 @@ import { EstadoPipe } from '../pipes/estado.pipe';
 export class CardPersonajeComponent {
 
     @Input() personaje!: Personaje;
-    private readonly router = inject(Router);
-
-    verDetalle(id: number): void {
-        this.router.navigate(['/personaje', id]);
-    }
 }

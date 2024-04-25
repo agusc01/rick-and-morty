@@ -44,8 +44,8 @@ import { RickyAndMortyService } from '../../services/ricky-and-morty.service';
                                 @if(personaje.episode.length){
                                     <ul class="list-group">
                                         @for (episodio of personaje.episode; track $index) {
-                                            <li class="list-group-item">
-                                                <a [routerLink]="['/episodio/',episodio | rutaEpisodio]">{{ episodio }}</a>
+                                            <li class="list-group-item cursor" [routerLink]="['/episodio/',episodio | rutaEpisodio]">
+                                                Mostrar el espisodio: {{ episodio  |rutaEpisodio}}
                                             </li>
                                         }
                                     </ul>
@@ -75,6 +75,14 @@ import { RickyAndMortyService } from '../../services/ricky-and-morty.service';
         }
     </main>
   `,
+    styles: `
+    .cursor {
+        cursor: pointer;
+        &:hover {
+            background-color: var(--bs-info)
+        }
+    }
+  `
 })
 export default class DetallePersonajePage implements OnInit {
 
