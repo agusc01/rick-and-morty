@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Species } from '../../interfaces/ricky-and-morty.interface';
+import { Species } from '../../interfaces/personajes.interface';
 
 @Pipe({
     name: 'especie',

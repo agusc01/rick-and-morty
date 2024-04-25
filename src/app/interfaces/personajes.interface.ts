@@ -1,4 +1,4 @@
-export interface RickyAndMorty {
+export interface Personajes {
     info: Info;
     results: Personaje[];
 }

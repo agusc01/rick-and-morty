@@ -12,9 +12,14 @@ export const routes: Routes = [
         loadComponent: () => import('./pages/home/home.page'),
     },
     {
-        title: 'Ricky & Morty API',
+        title: 'Detalle del personaje',
         path: 'personaje/:id',
         loadComponent: () => import('./pages/detalle-personaje/detalle-personaje.page'),
+    },
+    {
+        title: 'Detalle del episodio',
+        path: 'episodio/:id',
+        loadComponent: () => import('./pages/detalle-episodio/detalle-episodio.page'),
     },
     {
         title: 'Página no encontrada',

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Status } from '../../interfaces/ricky-and-morty.interface';
+import { Status } from '../../interfaces/personajes.interface';
 
 @Pipe({
     name: 'estado',

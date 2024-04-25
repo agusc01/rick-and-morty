@@ -10,7 +10,7 @@ import { RouterModule } from '@angular/router';
             <section class="container">
                 <h1 class="text-danger text-center">Página no encontrada</h1>
                 <article class="d-flex justify-content-center align-items-center flex-column">
-                    <button class="btn btn-outline-danger mb-4" routerLink="/">
+                    <button class="btn btn-outline-danger mb-4" [routerLink]="'/'">
                         Volver al inicio
                     </button>
                     <img

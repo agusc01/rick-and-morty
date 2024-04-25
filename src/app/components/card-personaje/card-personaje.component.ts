@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Personaje } from '../../interfaces/ricky-and-morty.interface';
+import { Personaje } from '../../interfaces/personajes.interface';
 import { EspeciePipe } from '../pipes/especie.pipe';
 import { EstadoPipe } from '../pipes/estado.pipe';
 

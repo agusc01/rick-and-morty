@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Gender } from '../../interfaces/ricky-and-morty.interface';
+import { Gender } from '../../interfaces/personajes.interface';
 
 @Pipe({
     name: 'genero',
