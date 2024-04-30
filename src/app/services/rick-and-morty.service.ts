@@ -11,13 +11,11 @@ export class RickAndMortyService {
     private readonly http = inject(HttpClient);
     private readonly urlBase = 'https://rickandmortyapi.com/api';
 
-    async getPersonajes(): Promise<Personaje[]> {
-        const url = `${this.urlBase}/character`;
+    getPersonajes(page: number = 1): Promise<Personajes> {
+        const url = `${this.urlBase}/character?page=${page}`;
         const response = this.http.get<Personajes>(url)
             .pipe(delay(this.delay));
-        const data = await firstValueFrom(response);
-
-        return data.results;
+        return firstValueFrom(response);
     }
 
     getPersonaje(id: number): Promise<Personaje> {
