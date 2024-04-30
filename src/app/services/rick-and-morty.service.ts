@@ -35,6 +35,13 @@ export class RickAndMortyService {
         return firstValueFrom(response);
     }
 
+    getMuchosPersonajesPornombre(nombre: string): Promise<Personaje[]> {
+        const url = `${this.urlBase}/character?name=${nombre}`;
+        const response = this.http.get<Personaje[]>(url)
+            .pipe(delay(this.delay));
+        return firstValueFrom(response);
+    }
+
     getEpisodio(id: number): Promise<Episodio> {
         const url = `${this.urlBase}/episode/${id}`;
         const response = this.http.get<Episodio>(url)

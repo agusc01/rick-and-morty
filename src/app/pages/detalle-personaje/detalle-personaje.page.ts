@@ -16,7 +16,7 @@ import { RickAndMortyService } from '../../services/rick-and-morty.service';
     template: `
     <main class="container">
         @if(personaje) {
-            <div class="container pt-5 mb-5">
+            <div class="container py-5">
                 <div class="row">
                     <div class="col-md-6 text-end">
                         <section class="card">
