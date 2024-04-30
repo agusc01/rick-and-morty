@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { InputBusquedaComponent } from '../input-busqueda/input-busqueda.component';
 
 @Component({
@@ -17,11 +17,12 @@ import { InputBusquedaComponent } from '../input-busqueda/input-busqueda.compone
                     </span>
                 </h1>
             </div>
-            <!-- <app-input-busqueda/> -->
+            <app-input-busqueda (nombre)="nombre.emit($event)"/>
         </header>
     `,
     styles: ``
 })
 export class HeaderComponent {
     @Input() public autor!: string;
+    @Output() nombre = new EventEmitter<string>();
 }

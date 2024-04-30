@@ -1,7 +1,6 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BehaviorSubject, debounceTime, skip, Subscription } from 'rxjs';
-import { RickAndMortyService } from '../../services/rick-and-morty.service';
+import { BehaviorSubject, debounceTime, filter, skip, Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-input-busqueda',
@@ -23,18 +22,18 @@ import { RickAndMortyService } from '../../services/rick-and-morty.service';
 })
 export class InputBusquedaComponent implements OnInit, OnDestroy {
 
-    private readonly api = inject(RickAndMortyService);
     private readonly $nombre = new BehaviorSubject<string>('');
     private subscripcion?: Subscription;
+    @Output() nombre = new EventEmitter<string>();
 
     ngOnInit(): void {
         this.subscripcion = this.$nombre.pipe(
             skip(1),
-            debounceTime(2000)
+            debounceTime(2000),
+            filter(nombre => !!nombre)
         )
             .subscribe(async (nombre) => {
-                const personajes = await this.api.getMuchosPersonajesPornombre(nombre);
-                console.log({ personajes });
+                this.nombre.emit(nombre);
             });
     }
 
