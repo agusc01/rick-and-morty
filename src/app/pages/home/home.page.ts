@@ -14,20 +14,23 @@ import { RickAndMortyService } from '../../services/rick-and-morty.service';
         <main class="container">
             <app-header [autor]="'Cacciatori Agustín'" (nombre)="setearNombre($event)"/>
             <app-mostrar-personajes [personajes]="data.results" />
-            <mat-paginator
-                class="mb-5 rounded"
-                (page)="handlePageEvent($event)"
-                [length]="data.info.count"
-                [pageSize]="20"
-                [hidePageSize]="true"
-                aria-label="Select page">
-            </mat-paginator>
+            @if(reset){
+                <mat-paginator
+                    class="mb-5 rounded"
+                    (page)="handlePageEvent($event)"
+                    [length]="data.info.count"
+                    [pageSize]="20"
+                    [hidePageSize]="true"
+                    aria-label="Select page">
+                </mat-paginator>
+            }
         </main>
   `,
 })
 export default class HomePage implements OnInit {
 
     private readonly api = inject(RickAndMortyService);
+    reset: boolean = true;
     data: Personajes = {
         info: {
             count: 0,
@@ -54,7 +57,8 @@ export default class HomePage implements OnInit {
     async setearNombre(nombre: string): Promise<void> {
         this.nombre = nombre;
         this.data!.results = [];
-        // this.pageIndex = 0;
+        this.reset = false;
         this.data = await this.api.getPersonajes(this.pageIndex, this.nombre);
+        this.reset = true;
     }
 }

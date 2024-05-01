@@ -9,7 +9,7 @@ import { InputBusquedaComponent } from '../input-busqueda/input-busqueda.compone
         <header class="pt-5">
             <div class="container">
                 <h1 class="title text-info mb-3">
-                    Ricky & Morty
+                    Rick & Morty
                     <span class="text-white">
                         <em>
                             by {{autor}}
