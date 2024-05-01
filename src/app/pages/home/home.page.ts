@@ -16,17 +16,16 @@ import { RickAndMortyService } from '../../services/rick-and-morty.service';
         <main class="container">
             <app-header [autor]="'Cacciatori Agustín'" (nombre)="setearNombre($event)"/>
             <app-mostrar-personajes [personajes]="data.results" />
-            @if(reset){
-                <mat-paginator
-                    class="mb-5 rounded"
-                    (page)="handlePageEvent($event)"
-                    [pageIndex]="this.paginaPaginator"
-                    [length]="data.info.count"
-                    [pageSize]="20"
-                    [hidePageSize]="true"
-                    aria-label="Select page">
-                </mat-paginator>
-            }
+            <mat-paginator
+                class="mb-5 rounded"
+                (page)="handlePageEvent($event)"
+                [pageIndex]="this.paginaPaginator"
+                [length]="data.info.count"
+                [pageSize]="20"
+                [hidePageSize]="true"
+                aria-label="Select page">
+            </mat-paginator>
+
         </main>
   `,
 })
@@ -50,7 +49,6 @@ export default class HomePage {
     paginaPaginator: number = 0;
 
     async handlePageEvent(paginacion: any): Promise<void> {
-        this.checkPagina();
         this.pagina = ++paginacion.pageIndex;
         this.data!.results = [];
         //TODO: catch (por nombre y pagina)
@@ -64,16 +62,10 @@ export default class HomePage {
     async setearNombre(nombre: string): Promise<void> {
         this.nombre = nombre;
         this.data!.results = [];
-        this.reset = false;
         this.pagina = Number(this.route.snapshot.queryParams[environment.pagina]) ?? 0;
+        this.paginaPaginator = this.pagina;
+        this.paginaPaginator--;
         this.data = await this.api.getPersonajes(this.pagina, this.nombre);
-        this.checkPagina();
-        this.reset = true;
     }
 
-    private checkPagina(): void {
-        if (this.pagina != this.paginaPaginator) {
-            this.paginaPaginator = --this.pagina;
-        }
-    }
 }
