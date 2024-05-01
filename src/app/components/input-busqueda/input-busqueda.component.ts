@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BehaviorSubject, debounceTime, filter, skip, Subscription } from 'rxjs';
+import { BehaviorSubject, debounceTime, skip, Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-input-busqueda',
@@ -30,7 +30,6 @@ export class InputBusquedaComponent implements OnInit, OnDestroy {
         this.subscripcion = this.$nombre.pipe(
             skip(1),
             debounceTime(2000),
-            filter(nombre => !!nombre)
         )
             .subscribe(async (nombre) => {
                 this.nombre.emit(nombre);
