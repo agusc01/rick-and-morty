@@ -1,7 +1,7 @@
 import { Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, debounceTime, Subscription } from 'rxjs';
+import { BehaviorSubject, debounceTime, skip, Subscription } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 
 @Component({
@@ -36,7 +36,9 @@ export class InputBusquedaComponent implements OnInit, OnDestroy {
         setTimeout(() => {
             this.setearNombre(this.route.snapshot.queryParams[environment.nombre] ?? '');
         }, 1);
+
         this.subscripcion = this.$nombre.pipe(
+            skip(1),
             debounceTime(environment.tiempoDeEsperaAlCambiarNombre),
         )
             .subscribe(async (nombre) => {
@@ -53,9 +55,12 @@ export class InputBusquedaComponent implements OnInit, OnDestroy {
         this.$nombre.next(nombre);
     }
 
-    setearNombre(nombre: string): void {
+    async setearNombre(nombre: string): Promise<void> {
         this.nombre.emit(nombre);
         this.nombreInput = nombre;
-        this.router.navigate([], { relativeTo: this.route, queryParams: { ...this.route.snapshot.queryParams, nombre } });
+        await this.router.navigate([], {
+            relativeTo: this.route, queryParams:
+                { ...this.route.snapshot.queryParams, nombre }
+        });
     }
 }
