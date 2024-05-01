@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, delay, firstValueFrom } from 'rxjs';
+import { catchError, delay, firstValueFrom, of } from 'rxjs';
 import { Episodio } from '../interfaces/episodio.interface';
 import { Personaje, Personajes } from '../interfaces/personajes.interface';
 
@@ -11,13 +11,16 @@ export class RickAndMortyService {
     private readonly http = inject(HttpClient);
     private readonly urlBase = 'https://rickandmortyapi.com/api';
 
-    getPersonajes(page: number = 1, name: string = ''): Promise<Personajes> {
+    getPersonajes(page: number = 1, name: string = ''): Promise<Personajes | undefined> {
 
         const url = `${this.urlBase}/character?page=${page}&name=${name}`;
         const response = this.http.get<Personajes>(url)
             .pipe(
-                // TODO: poner catchError
                 delay(this.delay),
+                catchError(error => {
+                    console.error(error);
+                    return of(undefined);
+                })
             );
         return firstValueFrom(response);
     }

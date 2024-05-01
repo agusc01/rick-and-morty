@@ -19,7 +19,7 @@ import { CardPersonajeComponent } from '../card-personaje/card-personaje.compone
                 @if(!personajes){
                     <div class="wrapper">
                         <h1 class="text-danger text-center">
-                            No hay personajes disponibles
+                            No hay personajes disponibles por el nombre o página
                         </h1>
                     </div>
                 }@else {

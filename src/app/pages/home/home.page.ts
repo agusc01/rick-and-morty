@@ -15,12 +15,12 @@ import { RickAndMortyService } from '../../services/rick-and-morty.service';
     template: `
         <main class="container">
             <app-header [autor]="'Cacciatori Agustín'" (nombre)="setearNombre($event)"/>
-            <app-mostrar-personajes [personajes]="data.results" />
+            <app-mostrar-personajes [personajes]="data?.results" />
             <mat-paginator
                 class="mb-5 rounded"
                 (page)="handlePageEvent($event)"
                 [pageIndex]="this.paginaPaginator"
-                [length]="data.info.count"
+                [length]="data?.info?.count"
                 [pageSize]="20"
                 [hidePageSize]="true"
                 aria-label="Select page">
@@ -35,7 +35,7 @@ export default class HomePage {
     private readonly router = inject(Router);
     private readonly api = inject(RickAndMortyService);
     reset: boolean = true;
-    data: Personajes = {
+    data?: Personajes = {
         info: {
             count: 0,
             pages: 0,
@@ -50,8 +50,7 @@ export default class HomePage {
 
     async handlePageEvent(paginacion: any): Promise<void> {
         this.pagina = ++paginacion.pageIndex;
-        this.data!.results = [];
-        //TODO: catch (por nombre y pagina)
+        if (this.data?.results) { this.data.results = []; }
         await this.router.navigate([], {
             relativeTo: this.route, queryParams:
                 { ...this.route.snapshot.queryParams, pagina: this.pagina }
@@ -61,7 +60,8 @@ export default class HomePage {
 
     async setearNombre(nombre: string): Promise<void> {
         this.nombre = nombre;
-        this.data!.results = [];
+        if (this.data?.results) { this.data.results = []; }
+        //README: no asustarse si es NaN
         this.pagina = Number(this.route.snapshot.queryParams[environment.pagina]) ?? 0;
         this.paginaPaginator = this.pagina;
         this.paginaPaginator--;
