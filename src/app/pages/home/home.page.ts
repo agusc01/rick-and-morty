@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HeaderComponent } from '../../components/header/header.component';
 import { MostrarPersonajesComponent } from '../../components/mostrar-personajes/mostrar-personajes.component';
@@ -27,7 +27,7 @@ import { RickAndMortyService } from '../../services/rick-and-morty.service';
         </main>
   `,
 })
-export default class HomePage implements OnInit {
+export default class HomePage {
 
     private readonly api = inject(RickAndMortyService);
     reset: boolean = true;
@@ -41,24 +41,20 @@ export default class HomePage implements OnInit {
         results: []
     };
     nombre?: string;
-    pageIndex: number = 0;
-
-    async ngOnInit(): Promise<void> {
-        this.data = await this.api.getPersonajes();
-    }
+    pagina: number = 0;
 
     async handlePageEvent(paginacion: any): Promise<void> {
-        this.pageIndex = ++paginacion.pageIndex;
+        this.pagina = ++paginacion.pageIndex;
         this.data!.results = [];
         //TODO: catch
-        this.data = await this.api.getPersonajes(this.pageIndex, this.nombre);
+        this.data = await this.api.getPersonajes(this.pagina, this.nombre);
     }
 
     async setearNombre(nombre: string): Promise<void> {
         this.nombre = nombre;
         this.data!.results = [];
         this.reset = false;
-        this.data = await this.api.getPersonajes(this.pageIndex, this.nombre);
+        this.data = await this.api.getPersonajes(this.pagina, this.nombre);
         this.reset = true;
     }
 }

@@ -1,6 +1,8 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { BehaviorSubject, debounceTime, skip, Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, debounceTime, Subscription } from 'rxjs';
+import { environment } from '../../../environments/environment.development';
 
 @Component({
     selector: 'app-input-busqueda',
@@ -9,6 +11,7 @@ import { BehaviorSubject, debounceTime, skip, Subscription } from 'rxjs';
     template: `
         <div class="form-floating mb-3">
             <input
+                [value]="nombreInput"
                 type="text"
                 class="form-control"
                 id="nombre"
@@ -22,17 +25,22 @@ import { BehaviorSubject, debounceTime, skip, Subscription } from 'rxjs';
 })
 export class InputBusquedaComponent implements OnInit, OnDestroy {
 
+    private readonly route = inject(ActivatedRoute);
+    private readonly router = inject(Router);
     private readonly $nombre = new BehaviorSubject<string>('');
     private subscripcion?: Subscription;
+    nombreInput: string = '';
     @Output() nombre = new EventEmitter<string>();
 
     ngOnInit(): void {
+        setTimeout(() => {
+            this.setearNombre(this.route.snapshot.queryParams[environment.nombre] ?? '');
+        }, 1);
         this.subscripcion = this.$nombre.pipe(
-            skip(1),
-            debounceTime(2000),
+            debounceTime(environment.tiempoDeEsperaAlCambiarNombre),
         )
             .subscribe(async (nombre) => {
-                this.nombre.emit(nombre);
+                this.setearNombre(nombre);
             });
     }
 
@@ -40,8 +48,14 @@ export class InputBusquedaComponent implements OnInit, OnDestroy {
         this.subscripcion?.unsubscribe();
     }
 
-    buscar(evento: Event) {
+    buscar(evento: Event): void {
         const nombre: string = (event?.target as HTMLInputElement).value;
         this.$nombre.next(nombre);
+    }
+
+    setearNombre(nombre: string): void {
+        this.nombre.emit(nombre);
+        this.nombreInput = nombre;
+        this.router.navigate([], { relativeTo: this.route, queryParams: { ...this.route.snapshot.queryParams, nombre } });
     }
 }
